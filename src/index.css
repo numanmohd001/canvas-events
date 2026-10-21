@@ -1,0 +1,42 @@
+@import "tailwindcss";
+
+:root {
+  --background: 220 12% 10%;          /* deep charcoal #161820 */
+  --foreground: 42 22% 90%;           /* warm ivory */
+  --primary: 42 22% 90%;
+  --primary-foreground: 220 12% 10%;
+  --accent: 42 55% 65%;               /* champagne gold #d4b87a */
+  --surface: 220 10% 14%;
+  --surface-raised: 220 9% 18%;
+  --muted-foreground: 42 8% 58%;
+  --border: 220 8% 22%;
+}
+
+@layer base {
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+  }
+
+  h1, h2, h3, h4, .font-serif-editorial {
+    font-family: 'Cormorant Garamond', serif;
+  }
+}
+
+.font-cormorant {
+  font-family: 'Cormorant Garamond', serif;
+}
+
+.font-inter {
+  font-family: 'Inter', sans-serif;
+}
+
+.label-editorial {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  text-transform: uppercase;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+}

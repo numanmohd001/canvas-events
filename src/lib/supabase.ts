@@ -1,13 +1,29 @@
-import { createClient } from '@supabase/supabase-js'
+import { createClient, type SupabaseClient } from '@supabase/supabase-js'
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || ''
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || ''
+const rawUrl = (import.meta.env.VITE_SUPABASE_URL || '').trim()
+const rawKey = (import.meta.env.VITE_SUPABASE_ANON_KEY || '').trim()
 
-export const isSupabaseConfigured = Boolean(supabaseUrl && supabaseAnonKey)
+const isValidSupabaseUrl = /^https?:\/\/[a-z0-9-]+\.supabase\.co/i.test(rawUrl)
+const isValidAnonKey =
+  rawKey.length > 20 &&
+  rawKey !== '[SENSITIVE]' &&
+  !rawKey.includes('PASTE_YOUR')
 
-export const supabase = isSupabaseConfigured
-  ? createClient(supabaseUrl, supabaseAnonKey)
-  : null
+export const isSupabaseConfigured = Boolean(
+  isValidSupabaseUrl && isValidAnonKey
+)
+
+let supabaseInstance: SupabaseClient | null = null
+if (isSupabaseConfigured) {
+  try {
+    supabaseInstance = createClient(rawUrl, rawKey)
+  } catch (err) {
+    console.warn('Supabase initialization skipped:', err)
+    supabaseInstance = null
+  }
+}
+
+export const supabase = supabaseInstance
 
 export interface EventOrder {
   id: string

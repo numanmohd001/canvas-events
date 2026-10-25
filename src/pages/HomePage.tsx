@@ -260,6 +260,12 @@ export const HomePage: React.FC = () => {
               Contact
             </a>
             <Link
+              to="/pipeline"
+              className="inline-flex items-center gap-1.5 text-xs uppercase tracking-[0.14em] text-[hsl(var(--muted-foreground))] hover:text-[#d4b87a] transition-colors"
+            >
+              Pipeline
+            </Link>
+            <Link
               to="/login"
               className="inline-flex items-center gap-1.5 text-xs uppercase tracking-[0.14em] text-[hsl(var(--muted-foreground))] hover:text-[#d4b87a] transition-colors"
             >

@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  canvas-events-web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: canvas-events-web
+    ports:
+      - "3000:80"
+    env_file:
+      - .env
+    restart: unless-stopped
+
+  jenkins-ci:
+    build:
+      context: .
+      dockerfile: Dockerfile.jenkins
+    container_name: canvas-events-jenkins
+    ports:
+      - "8085:8080"
+      - "50000:50000"
+    volumes:
+      - jenkins_home:/var/jenkins_home
+    restart: unless-stopped
+
+volumes:
+  jenkins_home:
